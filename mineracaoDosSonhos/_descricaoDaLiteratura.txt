@@ -1,0 +1,25 @@
+poema_incidencia.txt -> palavras mais significativas por ordem de incidência
+
+poema_incidencia_curto.txt -> palavras mais significativas por ordem de incidência, versão ditada e menor
+
+palavras_ordenadas_repetidas.txt -> palavras mais significativas por ordem alfabética e com repeticoes
+
+palavras_ordenadas.txt -> palavras mais significativas por ordem alfabética
+
+palavras_tamanhos.txt -> palavras mais significativas por tamanho
+
+vogalUnica.txt -> palavras com uma só vogal
+
+vogalX.txt -> palavras só com a vogal X
+
+palavraSom.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae
+
+palavraSom_.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae com repeticoes
+
+comecoFim.txt -> estilosas palavras que começam e terminam sentenças
+
+comecoFim_.txt -> simples palavras que começam e terminam frases
+
+collocations.txt -> termos recorrentes nos sonhos
+
+_o_o_ oOo _o_o_

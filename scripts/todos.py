@@ -7,6 +7,7 @@ for line in t:
     else:
         tt.append(line[:-1])
 ts=" ".join(tt)
+E=""
 
 import nltk as k, string
 # Tokeniza
@@ -41,6 +42,7 @@ poema_incidencia=("{} "*len(bb_)).format(*bb_)
 f=open("../mineracaoDosSonhos/poema_incidencia.txt","w")
 f.write(poema_incidencia)
 f.close()
+E+="poema_incidencia.txt -> palavras mais significativas por ordem de incidência\n\n"
 
 
 
@@ -53,37 +55,29 @@ f.write("""# sonho, pessoas outro irmão tudo começa sobre lua havia baratas (�
 # skate amigo junto conseguia tomada dentro começou
 # ensina assim havima lados ovos acordei cara império consegui""")
 f.close()
-
-
-
-
-
-
-
-
-
+E+="poema_incidencia_curto.txt -> palavras mais significativas por ordem de incidência, versão ditada e menor\n\n"
 
 #wt__.plot()
-
 W=wt__.tokens
 W.sort()
 f=open("../mineracaoDosSonhos/palavras_ordenadas_repetidas.txt","w")
 f.write(" ".join(W))
 f.close()
+E+="palavras_ordenadas_repetidas.txt -> palavras mais significativas por ordem alfabética e com repeticoes\n\n"
 
 W_=list(set(W))
 W_.sort()
 f=open("../mineracaoDosSonhos/palavras_ordenadas.txt","w")
 f.write(" ".join(W_))
 f.close()
+E+="palavras_ordenadas.txt -> palavras mais significativas por ordem alfabética\n\n"
 
 W__=W_[:]
 W__.sort(key = lambda s: -len(s))
 f=open("../mineracaoDosSonhos/palavras_tamanhos.txt","w")
 f.write(" ".join(W__))
 f.close()
-
-
+E+="palavras_tamanhos.txt -> palavras mais significativas por tamanho\n\n"
 
 def pvogal(palavra,vogal):
     va=["a","á","â","à","ã"]
@@ -119,6 +113,7 @@ ee=[i for i in W__ if pvogal(i,"e")][::-1]
 f=open("../mineracaoDosSonhos/vogalUnica.txt","w")
 f.write(" ".join(ee))
 f.close()
+E+="vogalUnica.txt -> palavras com uma só vogal\n\n"
 
 
 
@@ -184,6 +179,7 @@ uu2=[i for i in W__ if pvogal2(i,"u")][::-1]
 f=open("../mineracaoDosSonhos/vogalU.txt","w")
 f.write(" ".join(uu2))
 f.close()
+E+="vogalX.txt -> palavras só com a vogal X\n\n"
 
 # conjunto de consoantes e vogais
 # (d,j,z,h,s,e,i)
@@ -208,6 +204,7 @@ f.write(" ".join(psom+
                 psom2+
                 psom3))
 f.close()
+E+="palavraSom.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae\n\n"
 
 # fricativos
 psom=[i for i in W if pLetras(i,set(["d","j","z","h","s","f","z","j","r","v","e","é","ê","i","í"]))]
@@ -221,17 +218,20 @@ psom2[-1]+="\n"
 f=open("../mineracaoDosSonhos/palavraSom_.txt","w")
 f.write(" ".join(psom+psom2+psom3))
 f.close()
+E+="palavraSom_.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae com repeticoes\n\n"
 
 comeco_fim=[[k.tokenize.word_tokenize(i)[0],k.tokenize.word_tokenize(i)[-2]] for i in k.tokenize.sent_tokenize(ts)]
 cf=("{}"*len(comeco_fim)).format(*comeco_fim)
 f=open("../mineracaoDosSonhos/comecoFim.txt","w")
 f.write(cf)
 f.close()
+E+="comecoFim.txt -> estilosas palavras que começam e terminam sentenças\n\n"
 
 cf_=("{}"*len(comeco_fim)).format(*["{} {}\n".format(*i) for i in comeco_fim])
 f=open("../mineracaoDosSonhos/comecoFim_.txt","w")
 f.write(cf_)
 f.close()
+E+="comecoFim_.txt -> simples palavras que começam e terminam frases\n\n"
 
 
 
@@ -241,10 +241,17 @@ f.close()
 #uma praia; com isso; que não
 
 cf_=("{}"*len(comeco_fim)).format(*["{} {}\n".format(*i) for i in comeco_fim])
-f=open("../mineracaoDosSonhos/colocations.txt","w")
+f=open("../mineracaoDosSonhos/collocations.txt","w")
 f.write("""#meu irmão; meu namorado; uma espécie; uma pessoa; para mim; outro
 #rumo; meu tio; nos olhos; sonhei que; tinha feito; estava namorando;
 #para outra; uma mulher; uma prima; algo como; uma amiga; uma piscina;
 #uma praia; com isso; que não""")
 f.close()
+E+="collocations.txt -> termos recorrentes nos sonhos\n\n"
 
+E+="_o_o_ oOo _o_o_"
+
+
+f=open("../mineracaoDosSonhos/_descricaoDaLiteratura.txt","w")
+f.write(E)
+f.close()
