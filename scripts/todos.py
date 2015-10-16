@@ -1,3 +1,19 @@
+from pylatex import Document, Section, Subsection, Subsubsection, Table, Math, TikZ, Axis, \
+            Plot, Figure, Package
+from pylatex.utils import italic, escape_latex
+
+doc= Document()
+#doc.packages.append(Package('geometry', options=['tmargin=1cm',
+#                                                     'lmargin=10cm']))
+
+#with doc.create(Section('The simple stuff')):
+#        doc.append('Some regular text and some ' + italic('italic text. '))
+#
+#with doc.create(Section('The fancy stuff')):
+#        with doc.create(Subsection('Correct matrix equations')):
+#                    doc.append("Baraca")
+
+
 r=open("../corpora/corpora.txt","r")
 t=r.readlines()
 tt=[]
@@ -46,7 +62,6 @@ f.close()
 E+="poema_incidencia.txt -> palavras mais significativas por ordem de incidência\n\n"
 T+="\n\n"+poema_incidencia
 
-
 pic="""# sonho, pessoas outro irmão tudo começa sobre lua havia baratas (é) 
 # algo menino porta mim lugar roupa enorme vi pernas casa tio
 # sabia diz então namorado pé fazer praia almofada vermelha
@@ -59,6 +74,18 @@ f.write(pic)
 f.close()
 E+="poema_incidencia_curto.txt -> palavras mais significativas por ordem de incidência, versão ditada e menor\n\n"
 T+="\n\n"+pic
+with doc.create(Section('Incidência')):
+    with doc.create(Subsection("Versão completa")):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(poema_incidencia)
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras mais significativas por ordem de incidência")
+    with doc.create(Subsection('Incidência abreviada')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(escape_latex(pic))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras mais significativas por ordem de incidência, versão ditada e mais curta")
+
 
 #wt__.plot()
 W=wt__.tokens
@@ -77,6 +104,18 @@ f.close()
 E+="palavras_ordenadas.txt -> palavras mais significativas por ordem alfabética\n\n"
 T+="\n\n"+" ".join(W_)
 
+with doc.create(Section('Ordenação alfabética')):
+    with doc.create(Subsection("Ordenação alfabética com repetição de palavras")):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(W))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras mais significativas por ordem alfabética e com repeticoes")
+    with doc.create(Subsection("Ordenação alfabética sem repetição de palavras")):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(W_))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras mais significativas por ordem alfabética")
+
 W__=W_[:]
 W__.sort(key = lambda s: -len(s))
 f=open("../mineracaoDosSonhos/palavras_tamanhos.txt","w")
@@ -84,6 +123,12 @@ f.write(" ".join(W__))
 f.close()
 E+="palavras_tamanhos.txt -> palavras mais significativas por tamanho\n\n"
 T+="\n\n"+" ".join(W__)
+with doc.create(Section('Ordenação por tamanho')):
+    with doc.create(Subsection('literatura')):
+        doc.append(" ".join(W__))
+    with doc.create(Subsection('explicação')):
+            doc.append("palavras mais significativas por tamanho")
+
 
 def pvogal(palavra,vogal):
     va=["a","á","â","à","ã"]
@@ -113,15 +158,6 @@ def pvogal(palavra,vogal):
                 else:
                     return 0
     return palavra
-
-ee=[i for i in W__ if pvogal(i,"e")][::-1]
-
-f=open("../mineracaoDosSonhos/vogalUnica.txt","w")
-f.write(" ".join(ee))
-f.close()
-E+="vogalUnica.txt -> palavras com uma só vogal\n\n"
-T+="\n\n"+" ".join(ee)
-
 def pvogal2(palavra,vogal):
     va=["a","á","â","à","ã"]
     if vogal in va:
@@ -164,23 +200,30 @@ def pvogal2(palavra,vogal):
             return 0
     return palavra
 
-aa2=[i for i in W__ if pvogal2(i,"a")][::-1]
+ee=[i for i in W__ if pvogal(i,"e")]
+
+f=open("../mineracaoDosSonhos/vogalUnica.txt","w")
+f.write(" ".join(ee))
+f.close()
+E+="vogalUnica.txt -> palavras com uma só vogal\n\n"
+T+="\n\n"+" ".join(ee)
+aa2=[i for i in W__ if pvogal2(i,"a")]
 f=open("../mineracaoDosSonhos/vogalA.txt","w")
 f.write(" ".join(aa2))
 f.close()
-ee2=[i for i in W__ if pvogal2(i,"e")][::-1]
+ee2=[i for i in W__ if pvogal2(i,"e")]
 f=open("../mineracaoDosSonhos/vogalE.txt","w")
 f.write(" ".join(ee2))
 f.close()
-ii2=[i for i in W__ if pvogal2(i,"i")][::-1]
+ii2=[i for i in W__ if pvogal2(i,"i")]
 f=open("../mineracaoDosSonhos/vogalI.txt","w")
 f.write(" ".join(ii2))
 f.close()
-oo2=[i for i in W__ if pvogal2(i,"o")][::-1]
+oo2=[i for i in W__ if pvogal2(i,"o")]
 f=open("../mineracaoDosSonhos/vogalO.txt","w")
 f.write(" ".join(oo2))
 f.close()
-uu2=[i for i in W__ if pvogal2(i,"u")][::-1]
+uu2=[i for i in W__ if pvogal2(i,"u")]
 f=open("../mineracaoDosSonhos/vogalU.txt","w")
 f.write(" ".join(uu2))
 f.close()
@@ -190,6 +233,37 @@ T+="\n\n"+" ".join(ee2)
 T+="\n\n"+" ".join(ii2)
 T+="\n\n"+" ".join(oo2)
 T+="\n\n"+" ".join(uu2)
+with doc.create(Section('Palavras com uma só vogal')):
+    with doc.create(Subsection('Qualquer vogal')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(ee))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com uma só dentre as cinco vogais")
+    with doc.create(Subsection('A')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(escape_latex(" ".join(aa2)))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com A")
+    with doc.create(Subsection('E')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(ee2))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com E")
+    with doc.create(Subsection('I')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(ii2))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com I")
+    with doc.create(Subsection('O')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(oo2))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com O")
+    with doc.create(Subsection('U')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(" ".join(uu2))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com u")
 
 # conjunto de consoantes e vogais
 # (d,j,z,h,s,e,i)
@@ -215,9 +289,10 @@ f.write(" ".join(psom+
                 psom3))
 f.close()
 E+="palavraSom.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae\n\n"
-T+="\n\n"+" ".join(psom+
+psom_=" ".join(psom+
                 psom2+
                 psom3)
+T+="\n\n"+psom_
 
 # fricativos
 psom=[i for i in W if pLetras(i,set(["d","j","z","h","s","f","z","j","r","v","e","é","ê","i","í"]))]
@@ -232,9 +307,24 @@ f=open("../mineracaoDosSonhos/palavraSom_.txt","w")
 f.write(" ".join(psom+psom2+psom3))
 f.close()
 E+="palavraSom_.txt -> fricativas com ei, plosivas com ieou, plosivas+m com ae com repeticoes\n\n"
-T+="\n\n"+" ".join(psom+
+psom__=" ".join(psom+
                 psom2+
                 psom3)
+T+="\n\n"+psom__ 
+
+
+### TTM
+with doc.create(Section('palavras por sonoridades')):
+    with doc.create(Subsection('com repetições')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(escape_latex(psom__.replace("\n","\n\n")))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com uma só dentre as cinco vogais, com repetições")
+    with doc.create(Subsection('sem repetições')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(escape_latex(psom_))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras com uma só dentre as cinco vogais, sem repetições")
 
 comeco_fim=[[k.tokenize.word_tokenize(i)[0],k.tokenize.word_tokenize(i)[-2]] for i in k.tokenize.sent_tokenize(ts)]
 cf=("{}"*len(comeco_fim)).format(*comeco_fim)
@@ -250,6 +340,22 @@ f.write(cf_)
 f.close()
 E+="comecoFim_.txt -> simples palavras que começam e terminam frases\n\n"
 T+="\n\n"+cf_
+
+with doc.create(Section('palavras no começo e no fim das frases')):
+    with doc.create(Subsection('firulado')):
+        with doc.create(Subsubsection('literatura')):
+            doc.append(cf)
+        with doc.create(Subsubsection('explicação')):
+            doc.append("estilosas palavras que começam e terminam sentenças")
+    with doc.create(Subsection('simples')):
+        with doc.create(Subsubsection('literatura')):
+            #doc.append(cf_.replace("\n","\\linebreak "))
+            doc.append(escape_latex(cf_))
+        with doc.create(Subsubsection('explicação')):
+            doc.append("palavras em estilo simples que começam e terminam frases")
+
+
+
 
 
 
@@ -268,6 +374,14 @@ f.close()
 E+="collocations.txt -> termos recorrentes nos sonhos\n\n"
 T+="\n\n"+collocations
 
+with doc.create(Section('Termos compostos')):
+    with doc.create(Subsection('literatura')):
+        doc.append(escape_latex(collocations))
+    with doc.create(Subsection('explicação')):
+            doc.append("termos compostos recorrentes nos sonhos")
+
+
+
 E+="_o_o_ oOo _o_o_"
 T+="_o_o_ oOo _o_o_"
 T+=E
@@ -279,3 +393,5 @@ f.close()
 f=open("../mineracaoDosSonhos/TUDO.txt","w")
 f.write(T)
 f.close()
+
+doc.generate_pdf("../mineracaoDosSonhos/TUDO")
