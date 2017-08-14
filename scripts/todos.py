@@ -354,11 +354,7 @@ with doc.create(Section('palavras no começo e no fim das frases')):
         with doc.create(Subsubsection('explicação')):
             doc.append("palavras em estilo simples que começam e terminam frases")
 
-
-
-
-
-
+# t__.collocations()
 #meu irmão; meu namorado; uma espécie; uma pessoa; para mim; outro
 #rumo; meu tio; nos olhos; sonhei que; tinha feito; estava namorando;
 #para outra; uma mulher; uma prima; algo como; uma amiga; uma piscina;
