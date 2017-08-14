@@ -6,6 +6,20 @@
 \usepackage{wallpaper} 
 \usepackage{titlesec}   %% Define space between paragraph e section
 \usepackage{float} 	%% Use to fix Figure or Table: ex: \begin{table}[H]
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{hyperref} 	%% Use to fix Figure or Table: ex: \begin{table}[H]
+\hypersetup{
+	%pagebackref=true,
+	pdfcreator={LaTeX with abnTeX2},
+	pdfkeywords={abnt}{latex}{abntex}{USPSC}{trabalho acadêmico}, 
+	colorlinks=true,       		% false: boxed links; true: colored links
+	linkcolor=blue,          	% color of internal links
+	citecolor=blue,        		% color of links to bibliography
+	filecolor=magenta,      		% color of file links
+	urlcolor=blue,
+	allbordercolors=black,
+	bookmarksdepth=4
+}
 %%%%Don't edit this block. It reduces the spacing between the lines of the references
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{\OLDthebibliography{#1} \setlength{\parskip}{0pt}\setlength{\itemsep}{0pt plus 0.3ex}}
@@ -69,19 +83,19 @@
 \pagestyle{fancy}
 
 \section{INTRODUCTION}
-Although dreams are described in texts that range from ancient sacred~\cite{bible}
-to recent medical~\cite{dreamMed}, there is no consensus of what dreams are.
-We can exemplify the diverse theories with three simple cases:
+Although dreams are described in texts that range from ancient sacred~\citep{bible}
+to psychiatric~\citep{dreamMed}, there is no consensus of what dreams are.
+We can exemplify the diverse theories with three simple cases~\citep{dreamsGen}:
 \begin{itemize}
-	\item Dreams are often regarded by the dreamers as accessing spiritual helms or other realities.
+	\item dreams are often regarded by the dreamers as accessing spiritual realms and other realities.
 	\item Many scientists regard dreams as by-products of the sleeping process:
 		arbitrary interpretations given by the conscious mind to noisy signals without substantial meaning.
 	\item Freudian and Jungian psychoanalysis traditions understand dreams as symbolic constructs output by the unconscious mind.
 \end{itemize}
-\noindent We can, however, state some facts about dreams that make them very interesting material for therapy and for art.
+\noindent We can, however, state some facts about dreams that asserts them attractive for therapy and for art.
 First, dreams are often very rich in impacting and symbolic images.
 Second, they are told by the person who dreamed in a very attentive manner, as being very significant to the dreamer.
-In fact, most of us should be able to remind of a number of situations where someone (perhaps ourselves)
+In fact, most of us should be able to recall a number of situations where someone (perhaps ourselves)
 was describing a dream in a rapid, almost euphoric, succession of words.
 Dreams are so effective in yielding artistic materials that surrealism is an aesthetic explicitly inspired by dreams and
 symbolism is an example of artistic movement heavily influenced by dreams.
@@ -89,7 +103,7 @@ symbolism is an example of artistic movement heavily influenced by dreams.
 Text mining is data mining applied to textual data.
 There are many models for the text mining pipeline, but
 it can be summarized as: data collection and preparation,
-pattern recognition, evaluation of the output and reporting.
+pattern recognition, evaluation of the output and reporting~\citep{tmining}.
 This work addresses text mining of descriptions of dreams
 with aesthetics and therapeutic purposes.
 
@@ -97,34 +111,47 @@ Section~\ref{sec:matMet} describes the corpus and methods.
 Section~\ref{sec:res} is dedicated to presentation and discussion of results.
 Section~\ref{sec:conc} holds conclusions and further work considerations.
 
-\section{MATERIALS AND METHODS}
+\section{MATERIALS AND METHODS}\label{sec:matMet}
 \subsection{Corpus}
-The description of dreams we used are~\cite{dreams1} all in Brazilian Portuguese,
-collected as part of clinical practices in the year of 2014.
+The description of dreams we used are all in Brazilian Portuguese,
+collected as part of clinical practices in the year of 2015.
 Volunteers described the dreams and sent them to the second author or this paper.
-Thereafter, another collection of dreams~\cite{dreams2} was gathered in the same way by the second author,
+Thereafter, another collection of dreams was gathered in the same way by the second author and collaborators,
 with the purpose of expanding the analysis and synthesis of texts performed with the previous
-corpus, but was not used until now.
+corpus.
 It is a larger corpus, also in Brazilian Portuguese.
-Interestingly, both corpus contains description of dreams by women only.
-Both corpus are summarized in Table~\ref{tab:dreams} in numbers of dreams, paragraphs,
-and letters.
+Interestingly, both corpus contain descriptions of dreams by women only.
+Their scales are summarized in Table~\ref{tab:dreams} in terms of numbers of characters, tokens,
+and paragraphs.
+
+\begin{table}[H] % !htbp 
+	\caption{Corpus files and elementary countings.
+	The number of dreams is about the same as the number of paragraphs.
+	The date column corresponds to  the moth when the last dream was collected.}\label{tab:dreams}
+\vspace{12pt}
+\centering{}
+	\begin{tabular}{  c || c | c | c | c | c }
+		\textbf{File}           & \textbf{Characters} & \textbf{Tokens} & \textbf{Sentences} & \textbf{Paragraphs} & \textbf{Date} \\\hline
+		\texttt{corpora.txt}  & 9456 & 1693 & 104 & 30 & Mar/2015 \\
+		\texttt{corpora2.txt}  & 71514 & 14691 & 435 & 156 & Nov/2015 \\
+\end{tabular}
+\end{table}
 
 \subsection{Analysis and derivation methods}
 The texts were analyzed to support the extraction of meaning from the dreams
 and for the creation of artistic texts.
 We strived to keep the methods very simple in order to avoid puzzling the involved parties.
-We considered three lists of tokens:
+Three lists of tokens were considered:
 \begin{itemize}
 	\item punctuations !"\#\$\%\&'()*+,-./:;<=>?@[]\textbackslash\textasciicircum\_`\{\}|\textasciitilde. Obtained through the command \\ \texttt{string.punctuation} of Python's string (standard) library.
 	\item Portuguese \emph{stopwords}\footnote{The exact definition and list of stopwords are not consensual.
 		Anyway, one can regard them as words with lesser meaning and which are very frequent, such as conjunctions and prepositions.}
-		obtained through NLTK~\cite{nltk} by the command \\ \texttt{nltk.corpus.stopwords.words("portuguese")}.
+		obtained through NLTK~\citep{nltk} by the command \\ \texttt{nltk.corpus.stopwords.words("portuguese")}.
 	\item Tokens in the texts which were not punctuations nor stopwords.
-		These were regarded as the most meaningful words in the text and were used in their order of appearance.
+		These were regarded as the most meaningful words in the corpus.
 \end{itemize}
 
-This list of most meaningful words was used as the core material for the achievement
+This selection of most meaningful words was used as the core material for the achievement
 of more interesting constructions for
 art and therapy through filtering and ordering.
 Most significantly, the ordering could be based on the alphabet, the size of tokens in number of letters,
@@ -132,7 +159,7 @@ or the count of incidences of the words, or any combination of these.
 Filtering could be performed by restricting the vowels, consonants (e.g. fricatives), word size, frequency, or
 collocations.
 
-\section{RESULTS AND DISCUSSION}
+\section{RESULTS AND DISCUSSION}\label{sec:res}
 The list of most meaningful words (described in the previous section) was filtered and ordered
 in many ways to yield diverse sequences of interest.
 After an inspection of the results, these criteria were selected to compose a final document:
@@ -143,32 +170,53 @@ These were considered the most raw sequences and used subsequently to derive oth
 		with such variations of ordering and repetition.
 	\item Words with only one vowel (repeated any number of times).
 	\item Only words with fricatives or plosives or
-some combination of them (e.g. plosives and m and vowels 'a' and 'e').
+some combination of them (e.g. plosives and 'm' and vowels 'a' and 'e').
 	\item Words that start and end sentences.
-	\item Collocations (pair of words which are frequent).
+	\item Collocations (pairs of words which are frequent).
 \end{itemize}
 
 Such final document and other files are available online and exposed in Table~\ref{tab:files}.
-An example of these texts is in Table~\ref{tab:comecoFinal} with a translation
+An example of the derived texts is in Table~\ref{tab:comecoFinal} with a translation
 from Portuguese to English.
 These texts were used for aesthetic appreciation and also in a schizoanalysis group session
-in 2014, Casa Nuvem, Rio de Janeiro, RJ, Brazil.
+in 2014 (Casa Nuvem, Rio de Janeiro, RJ, Brazil).
 The artist Giuliano Obici used the texts to make live electroacoustic music,
 which was accompanied by declamations.
-The groups was constituted by the volunteers who described the dreams and
-the description of the episode is somewhat impressive:
+The group was constituted by the volunteers who described the dreams and
+the report of the episode is somewhat impressive:
 the members had strong impressions, some of them cried and entered a quasi-shock state. 
+
+\begin{table}[H] % !htbp 
+	\caption{Files related to the text mining of dreams.
+	All files are found in a public git repository dedicated to the developments presented in this article~\citep{repo}.}\label{tab:files}
+\vspace{12pt}
+\centering{}
+	\begin{tabular}{  c | p{8cm} }
+	\textbf{File}           & \textbf{Description} \\\hline
+	\texttt{scripts/todos.py}  & Python script that makes the current analysis and renders the TXT and PDF files     \\
+	\texttt{corpora/corpora.txt}  & the first collection of descriptions of dreams \\
+		\texttt{corpora/corpora2.txt}  & the second (and larger) collection of descriptions of dreams      \\
+	\texttt{mineracaoDosSonhos/PLNSonhos.odt}  & a brief consideration of the text mining of dreams to which this article is dedicated  \\
+		\texttt{mineracaoDosSonhos/TUDO.pdf}  & a thorough exposition of all the (selected) texts derived from the descriptions of dreams  \\
+\end{tabular}
+\end{table}
+ 
+
+
+
 
 \newpage %
 
 \vspace{12cm}
 
 \begin{table}[H] % !htbp 
-	\caption{Example of artistic text obtained from description of dreams.
+	\caption{Example of artistic text achieved from the descriptions of dreams.
 	This text was obtained through picking only the first and last words of each sentence.}\label{tab:comecoFinal}
 \vspace{12pt}
 \centering{}
+ \small
 \begin{tabular}{  c | c }
+	\textbf{Portuguese (original)}      &                                                \textbf{English (translation)} \\
 Escorregava glandes              &                                                Slipping glands         \\
 Numa assustavam                  &                                                At once, they scared    \\
 Eu suada                         &                                                I sweated               \\
@@ -177,11 +225,13 @@ Não acabou                       &                                             
 Barras mim                       &                                                Bars me                 \\
 Andei construtores               &                                                I walked builders       \\
 Pessoas )                        &                                                People  )               \\
+  & \\
 Sonhei formei                    &                                                I dreamed I formed      \\
 Estava menino                    &                                                It was boy              \\
 Depois boa                       &                                                Then good               \\
 Esse meu                         &                                                This mine               \\
 Sonhos descendo                  &                                                Dreams coming down      \\
+  & \\
 O irmão                          &                                                The brother             \\
 Meu punição                      &                                                My punishment           \\
 Começa irmão                     &                                                Begins brother          \\
@@ -192,6 +242,7 @@ Eu parede                        &                                              
 Sinto dele                       &                                                I'm fell him            \\
 A importência                    &                                                The ``importence''      \\
 O buraco                         &                                                The hole                \\
+  & \\
 Acordei ofegante                 &                                                Woke up breathless    \\
 Sensação NÃO                     &                                                Feeling NO              \\
 Já rumo                          &                                                I'm on my way           \\
@@ -201,25 +252,36 @@ A tempo                          &                                              
 Até porta                        &                                                Up to door              \\
 O disso                          &                                                The this                    \\
 Eu sobreviver                    &                                                I survive               \\
+	Parecia ferramentas              & Seemed like tools                             \\
+  & \\
+	Três mim          & Three of me \\
+	Lavo piano         & I wash piano \\
+	Havia tirano & There was a tyrant \\
+	Nele tudo & In him all \\
+	Jogaram fogo & They set fire \\
+	Pessoas presas &  People trapped \\
+	Comecei ali & I started there \\
+	Mas destruísse & But destroy \\
+	Pessoas criança & Children people
 \end{tabular}
 \end{table}
 
 \newpage %
 
 % \newpage %
-\section{CONCLUSIONS AND FUTURE WORK}
+\section{CONCLUSIONS AND FUTURE WORK}\label{sec:conc}
 We understand that the results are compelling for both art and therapy.
 Only the first corpus was used, which is smaller and made easier the selection of the resulting texts.
 The methods applied are very simple, favoring the communication between the parties,
 and are promptly deepened and expanded into more complex processes.
 This work seems unique in the sense of using text mining of dreams for art and therapy,
 which, in our opinion, benefit the appreciation of it as a multidisciplinary scientific contribution
-in computer science, art and psychology (schizoanalysis).
+in computer science, art and psychology.
 
 In further efforts,
 we might use for the corpus:
 \begin{itemize}
-	\item descriptions of dreams in the literature (e.g. Bible);
+	\item descriptions of dreams in the literature (e.g. from the Bible);
 	\item other languages;
 	\item an expansion of current corpus;
 	\item dreams from specific groups, e.g. again gender related or of a specific age span, professional or educational background, etc.
@@ -227,13 +289,13 @@ we might use for the corpus:
 
 \noindent About the text mining methods, we might:
 \begin{itemize}
-	\item Use specific routines for classification (e.g. clusterization) of texts or their features.
-	\item Expand the methods of selection of words to better encompass meter (e.g. number of syllables).
-	\item Expand methods of selection of words and phrases by their sonorities: sequence of vowels or consonants, mute consonants, paroxytones, etc.
-	\item Use Wordnet in order to relate terms through semantic links (e.g. hypernymy, meronymy, synonymy).
+	\item use specific routines for classification (e.g. clusterization) of texts or their features;
+	\item expand the methods of selection of words to better encompass meter (e.g. number of syllables);
+	\item expand the methods of selection of words and phrases by their sonorities (e.g. by using sequences of vowels or consonants, mute consonants, paroxytones);
+	\item use Wordnet~\citep{wordnet} in order to relate terms through semantic links (e.g. hypernymy, meronymy, synonymy).
 \end{itemize}
 
-The exploration of the results in therapeutic sessions and for the achievement of compelling selections of
+The exploration of the results in therapeutic sessions and for the achievement of collections of
 artistic texts should be kept as the core purposes.
 
 \subsection*{\textit{Acknowledgements}}
@@ -245,31 +307,30 @@ the Python language and the NLTK.
 % ------------------------------------------------------------------------
 \begin{thebibliography}{99}
 \fontsize{11}{0}\selectfont
-\bibitem[Aznar \& Pessoa, 1994]{Aznar94}
-Aznar, M., Pessoa, F.L.P. and Silva Telles, A. (1994), ``Vapor-Liquid Equilibria of Mixed Solvent-Salt Systems using a MHV2 Model with the Wilson Equation'', {\em X Congresso Brasileiro de Engenharia Química}, São Paulo, vol 1, 38-43.
+\bibitem[Barker et al., 1993]{bible}
+Barker, K. L., Burdick, D., Burdick, D. W. (1993). The NIV study bible, new international version. Zondervan Bible Publishers.
 
-\bibitem[Freitas et~al., 2008]{Freitas08}
-de Freitas, G.C.S.; Peixoto, F.C.; Vianna Jr, A.S. (2008), Simulation of a thermal battery using Phoenics. Journal of Power Sources, 179, 424-429. 
+\bibitem[Bird, 2006]{nltk}
+Bird, S. (2006). NLTK: the natural language toolkit. In Proceedings of the COLING/ACL on Interactive presentation sessions (pp. 69-72). Association for Computational Linguistics.
 
-\bibitem[Duarte, 1999]{Duarte99}
-Duarte, C.S.A. (1999), {\em Equilíbrio Líquido-Líquido em Sistemas contendo Polímero e Eletrólito: Água/ Polietileno-glicol/Fosfato}, Laboratório de Equilíbrio de Fases, FEQ/UNICAMP, Campinas.
+\bibitem[Domhoff, 2013]{dreamsGen}
+Domhoff, G. W. (2013). Finding meaning in dreams: A quantitative approach. Springer Science \& Business Media.
 
-\bibitem[Fredenslund, 1993]{Fredenslund93}
-Fredenslund A. e Sorensen, J.M. (1993), ``Group Contribution Estimation Methods'', in {\em  Models for Thermodynamic and Phase Equilibria Calculations}, S.I. Sandler (ed.), Marcel Dekker, Inc., New York.
+\bibitem[Esposito et al., 1999]{dreamMed}
+Esposito, K., Benitez, A., Barza, L., Mellman, T. (1999). Evaluation of dream content in combat-related PTSD. Journal of traumatic stress, 12(4), 681-687.
 
-\bibitem[Silva, 2005]{Silva2005}
-Silva, L.F. (2005), ``{\em Predição de Pontos Críticos de Misturas Termodinâmicas}'', Tese de Doutorado, IPRJ/UERJ, Nova Friburgo.
+\bibitem[Fabbri, 2017]{tmining}
+Fabbri, R. (2017). Topological stability and textual differentiation in human interaction networks:
+		statistical analysis, visualization and linked data. PhD thesis, University of São Paulo.
+		\url{https://github.com/ttm/thesis/raw/master/thesis-rfabbri.pdf}
 
-\bibitem[Krevelenm, 1990]{Krevelen90}
-Van Krevelen, D.W. (1990),{\em ``Properties of Polymers. Their Correlation with Chemical Structure, Their Numerical Estimation and Prediction from Additive Group Contribuition}'', 3º ed., Elsevier, Amsterdam.
+\bibitem[Fabbri \& Borges, 2015]{repo}
+Fabbri, R., Borges, F.M. (2015). Public git repository with the texts, scripts and corpora for the analysis of dreams.
+		\url{https://github.com/ttm/sonhos}
+
+\bibitem[Fellbaum, 2010]{wordnet}
+Fellbaum, C. (2010). WordNet. In Theory and applications of ontology: computer applications (pp. 231-243). Springer Netherlands.
 \end{thebibliography}
-\vspace*{-0.1cm}
-\section*{APPENDIX A}
-This section, if necessary, must be included here.
-
-\vspace{0.5cm} % Example spaces
-
-For Papers written in Portuguese or Spanish a translation of title, abstract and keywords into English must be provided after the Appendix using the same format for title, abstract and keywords presented in the first page of the template.
 % ------------------------------------------------------------------------
 
 %For papers written in Portuguese or Spanish.
