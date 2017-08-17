@@ -20,6 +20,13 @@
 	allbordercolors=black,
 	bookmarksdepth=4
 }
+\usepackage{tocloft}
+\titleformat{\section}
+  {\normalfont\bfseries}{\thesection.}{0.5em}{}
+\renewcommand\cftsecaftersnum{.} 
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
 %%%%Don't edit this block. It reduces the spacing between the lines of the references
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{\OLDthebibliography{#1} \setlength{\parskip}{0pt}\setlength{\itemsep}{0pt plus 0.3ex}}
@@ -67,15 +74,15 @@
 \rhead{}
 
 \begin{abstract}
-	Dreams are highly valued in both Freudian psychoanalysis and less conservative therapeutic traditions.
-	Text mining enables the extraction of meaning from writings in powerful and unexpected ways.
-	In this work, we report methods, uses and results obtained by mining descriptions of dreams.
-	The texts were collected as part of clinical practices from dozens of volunteers.
-	They were subsequently mined using various techniques for the achievement of poems and summaries,
-	which were then used in schizoanalysis (therapeutic) sessions by means of music and declamation.
-	The results were found aesthetically appealing and effective to engage the audience of patients.
-	The expansion of the corpus, mining methods and strategies for using the derivatives for art
-	and therapy are considered for future work.
+Dreams are highly valued in both Freudian psychoanalysis and less conservative therapeutic traditions.
+Text mining enables the extraction of meaning from writings in powerful and unexpected ways.
+In this work, we report methods, uses and results obtained by mining descriptions of dreams.
+The texts were collected as part of clinical practices from dozens of volunteers.
+They were subsequently mined using various techniques for the achievement of poems and summaries,
+which were then used in schizoanalysis (therapeutic) sessions by means of music and declamation.
+The results were found aesthetically appealing and effective to engage the audience of patients.
+The expansion of the corpus, mining methods and strategies for using the derivatives for art
+and therapy are considered for future work.
 \end{abstract}
 
 \keywords{\em{Dreams, Text mining, Poetry, Art, Schizoanalysis}}
