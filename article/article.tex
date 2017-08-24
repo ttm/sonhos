@@ -32,7 +32,7 @@
 \renewcommand\thebibliography[1]{\OLDthebibliography{#1} \setlength{\parskip}{0pt}\setlength{\itemsep}{0pt plus 0.3ex}}
 
 %%-----------------------------------------------EDIT-----------------------------------------------
-\title{TEXT MINING DESCRIPTIONS OF DREAMS: AESTHETIC AND THERAPEUTIC EFFORTS}
+\title{TEXT MINING DESCRIPTIONS OF DREAMS: AESTHETIC AND CLINICAL EFFORTS}
 
 %%-----------------------------------------------EDIT----------------------------------------------
 \author
@@ -74,32 +74,37 @@
 \rhead{}
 
 \begin{abstract}
-Dreams are highly valued in both Freudian psychoanalysis and less conservative therapeutic traditions.
+Dreams are highly valued in both Freudian psychoanalysis and less conservative clinical traditions.
 Text mining enables the extraction of meaning from writings in powerful and unexpected ways.
 In this work, we report methods, uses and results obtained by mining descriptions of dreams.
-The texts were collected as part of clinical practices from dozens of volunteers.
+The texts were collected as part of a course in Schizoanalysis (Clinical Psychology) from dozens of participants.
 They were subsequently mined using various techniques for the achievement of poems and summaries,
-which were then used in schizoanalysis (therapeutic) sessions by means of music and declamation.
-The results were found aesthetically appealing and effective to engage the audience of patients.
+which were then used in clinical sessions by means of music and declamation.
+The results were found aesthetically appealing and effective to engage the audience.
 The expansion of the corpus, mining methods and strategies for using the derivatives for art
 and therapy are considered for future work.
 \end{abstract}
 
-\keywords{\em{Dreams, Text mining, Poetry, Art, Schizoanalysis}}
+\keywords{\em{Text mining, Dreams, Schizoanalysis, Poetry, Art}}
 
 \pagestyle{fancy}
 
 \section{INTRODUCTION}
-Although dreams are described in texts that range from ancient sacred~\citep{bible}
+Although dreams are described in texts that range from ancient sacred~\citep{bible,boas,kopenawa}
 to psychiatric~\citep{dreamMed}, there is no consensus of what dreams are.
+% * <renato.fabbri@gmail.com> 2017-08-22T10:30:03.356Z:
+% 
+% ae meu comentário aqui
+% 
+% ^.
 We can exemplify the diverse theories with three simple cases~\citep{dreamsGen}:
 \begin{itemize}
 	\item dreams are often regarded by the dreamers as accessing spiritual realms and other realities.
 	\item Many scientists regard dreams as by-products of the sleeping process:
 		arbitrary interpretations given by the conscious mind to noisy signals without substantial meaning.
-	\item Freudian and Jungian psychoanalysis traditions understand dreams as symbolic constructs output by the unconscious mind.
+	\item Freudian and Jungian psychoanalytic traditions understand dreams as symbolic constructs output by the unconscious mind.
 \end{itemize}
-\noindent We can, however, state some facts about dreams that asserts them attractive for therapy and for art.
+\noindent We can, however, state some facts about dreams that assert them as attractive for therapy and for art.
 First, dreams are often very rich in impacting and symbolic images.
 Second, they are told by the person who dreamed in a very attentive manner, as being very significant to the dreamer.
 In fact, most of us should be able to recall a number of situations where someone (perhaps ourselves)
@@ -112,7 +117,7 @@ There are many models for the text mining pipeline, but
 it can be summarized as: data collection and preparation,
 pattern recognition, evaluation of the output and reporting~\citep{tmining}.
 This work addresses text mining of descriptions of dreams
-with aesthetics and therapeutic purposes.
+with aesthetic and therapeutic purposes.
 
 Section~\ref{sec:matMet} describes the corpus and methods.
 Section~\ref{sec:res} is dedicated to presentation and discussion of results.
@@ -122,7 +127,7 @@ Section~\ref{sec:conc} holds conclusions and further work considerations.
 \subsection{Corpus}
 The description of dreams we used are all in Brazilian Portuguese,
 collected as part of clinical practices in the year of 2015.
-Volunteers described the dreams and sent them to the second author or this paper.
+Participants described the dreams and sent them to the second author of this paper, who is a psychologist.
 Thereafter, another collection of dreams was gathered in the same way by the second author and collaborators,
 with the purpose of expanding the analysis and synthesis of texts performed with the previous
 corpus.
@@ -134,7 +139,7 @@ and paragraphs.
 \begin{table}[H] % !htbp 
 	\caption{Corpus files and elementary countings.
 	The number of dreams is about the same as the number of paragraphs.
-	The date column corresponds to  the moth when the last dream was collected.}\label{tab:dreams}
+	The date column corresponds to  the month when the last dream was collected.}\label{tab:dreams}
 \vspace{12pt}
 \centering{}
 	\begin{tabular}{  c || c | c | c | c | c }
@@ -160,7 +165,7 @@ Three lists of tokens were considered:
 
 This selection of most meaningful words was used as the core material for the achievement
 of more interesting constructions for
-art and therapy through filtering and ordering.
+art and clinical psychology  through filtering and ordering.
 Most significantly, the ordering could be based on the alphabet, the size of tokens in number of letters,
 or the count of incidences of the words, or any combination of these.
 Filtering could be performed by restricting the vowels, consonants (e.g. fricatives), word size, frequency, or
@@ -179,7 +184,7 @@ These were considered the most raw sequences and used subsequently to derive oth
 	\item Only words with fricatives or plosives or
 some combination of them (e.g. plosives and 'm' and vowels 'a' and 'e').
 	\item Words that start and end sentences.
-	\item Collocations (pairs of words which are frequent).
+	\item Collocations (pairs of words which are frequent together).
 \end{itemize}
 
 Such final document and other files are available online and exposed in Table~\ref{tab:files}.
@@ -187,9 +192,10 @@ An example of the derived texts is in Table~\ref{tab:comecoFinal} with a transla
 from Portuguese to English.
 These texts were used for aesthetic appreciation and also in a schizoanalysis group session
 in 2014 (Casa Nuvem, Rio de Janeiro, RJ, Brazil).
-The artist Giuliano Obici used the texts to make live electroacoustic music,
-which was accompanied by declamations.
-The group was constituted by the volunteers who described the dreams and
+In the same course, the artist Giuliano Obici used the texts to feed his program "Voices Simulacrum"~\citep{obici}: a machinic chorus of robotic voices with computers connected in network. The project integrated devices in the computer (sound, video and network cards) exploring the network as a distributed audiovisual instrument (conceptualized as a ``metamedia-instrument'')
+to read the texts in a very performative manner.
+
+The group was constituted by the participants who described the dreams and
 the report of the episode is somewhat impressive:
 the members had strong impressions, some of them cried and entered a quasi-shock state. 
 
@@ -200,11 +206,11 @@ the members had strong impressions, some of them cried and entered a quasi-shock
 \centering{}
 	\begin{tabular}{  c | p{8cm} }
 	\textbf{File}           & \textbf{Description} \\\hline
-	\texttt{scripts/todos.py}  & Python script that makes the current analysis and renders the TXT and PDF files     \\
-	\texttt{corpora/corpora.txt}  & the first collection of descriptions of dreams \\
-		\texttt{corpora/corpora2.txt}  & the second (and larger) collection of descriptions of dreams      \\
-	\texttt{mineracaoDosSonhos/PLNSonhos.odt}  & a brief consideration of the text mining of dreams to which this article is dedicated  \\
-		\texttt{mineracaoDosSonhos/TUDO.pdf}  & a thorough exposition of all the (selected) texts derived from the descriptions of dreams  \\
+	\texttt{scripts/todos.py}  & Python script that makes the current analysis and renders the TXT and PDF files.     \\
+	\texttt{corpora/corpora.txt}  & The first collection of descriptions of dreams. \\
+		\texttt{corpora/corpora2.txt}  & The second (and larger) collection of descriptions of dreams.      \\
+	\texttt{mineracaoDosSonhos/PLNSonhos.odt}  & A brief consideration of the text mining of dreams to which this article is dedicated.  \\
+		\texttt{mineracaoDosSonhos/TUDO.pdf}  & A thorough exposition of all the (selected) texts derived from the descriptions of dreams.  \\
 \end{tabular}
 \end{table}
  
@@ -277,18 +283,18 @@ Eu sobreviver                    &                                              
 
 % \newpage %
 \section{CONCLUSIONS AND FUTURE WORK}\label{sec:conc}
-We understand that the results are compelling for both art and therapy.
+We understand that the results are compelling for both art and clinical psychology.
 Only the first corpus was used, which is smaller and made easier the selection of the resulting texts.
 The methods applied are very simple, favoring the communication between the parties,
 and are promptly deepened and expanded into more complex processes.
-This work seems unique in the sense of using text mining of dreams for art and therapy,
-which, in our opinion, benefit the appreciation of it as a multidisciplinary scientific contribution
+This work seems unique in the sense of using text mining of dreams for art and clinical psychology,
+which, in our opinion, benefits the appreciation of it as a multidisciplinary and scientific contribution
 in computer science, art and psychology.
 
 In further efforts,
 we might use for the corpus:
 \begin{itemize}
-	\item descriptions of dreams in the literature (e.g. from the Bible);
+	\item descriptions of dreams in the literature (e.g. from the mythology, traditional communities, etc); 
 	\item other languages;
 	\item an expansion of current corpus;
 	\item dreams from specific groups, e.g. again gender related or of a specific age span, professional or educational background, etc.
@@ -307,7 +313,7 @@ artistic texts should be kept as the core purposes.
 
 \subsection*{\textit{Acknowledgements}}
 The authors thank the volunteers who supplied the descriptions of dreams;
-the subjects with attended to the schizoanalysis sessions;
+the subjects who attended to the schizoanalysis sessions;
 the open source software developers, especially those who enabled this work by developing
 the Python language and the NLTK.
 
@@ -319,6 +325,9 @@ Barker, K. L., Burdick, D., Burdick, D. W. (1993). The NIV study bible, new inte
 
 \bibitem[Bird, 2006]{nltk}
 Bird, S. (2006). NLTK: the natural language toolkit. In Proceedings of the COLING/ACL on Interactive presentation sessions (pp. 69-72). Association for Computational Linguistics.
+
+\bibitem[Boas \& Boas, 1974]{boas}
+Boas, O. V., \& Boas, C. V. (1974). Xingu: the Indians, their myths. Souvenir Press.
 
 \bibitem[Domhoff, 2013]{dreamsGen}
 Domhoff, G. W. (2013). Finding meaning in dreams: A quantitative approach. Springer Science \& Business Media.
@@ -337,6 +346,15 @@ Fabbri, R., Borges, F.M. (2015). Public git repository with the texts, scripts a
 
 \bibitem[Fellbaum, 2010]{wordnet}
 Fellbaum, C. (2010). WordNet. In Theory and applications of ontology: computer applications (pp. 231-243). Springer Netherlands.
+
+\bibitem[Kopenawa, 2013]{kopenawa}
+Kopenawa, D. (2013). The falling sky. Harvard University Press.
+
+\bibitem[Obici, 2015]{obici}
+Obici, G. (2015). Vozes Simulacrum: a machinic choir with connected computers. From \url{http://www.giulianobici.com/site/vozessimulacrum.html}
+
+
+
 \end{thebibliography}
 % ------------------------------------------------------------------------
 
@@ -355,3 +373,4 @@ Fellbaum, C. (2010). WordNet. In Theory and applications of ontology: computer a
 %\keywords{\em{Keywords in english}}
 
 \end{document}
+
